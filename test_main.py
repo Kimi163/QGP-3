@@ -1,3 +1,6 @@
+import pytest
+
+
 def test_greeting():
     """
     Напишите программу, которая выводит на экран приветствие.
@@ -39,7 +42,9 @@ def test_circle():
     length = 2 * pi * r
     assert length == 144.51326206513048
 
-def test_random_list():
+
+@pytest.mark.parametrize('execution_number', range(50))
+def test_random_list(execution_number):
     """
     Создайте список из 10 случайных чисел от 1 до 100 (включая обе границы) и отсортируйте его по возрастанию.
     """
@@ -47,6 +52,8 @@ def test_random_list():
     from random import randint
     l = [randint(1, 101) for i in range(10)]
     l.sort()
+    print(l)
+    assert l[9] < 101
     assert len(l) == 10
     assert all(l[i] <= l[i + 1] for i in range(len(l) - 1))
 
